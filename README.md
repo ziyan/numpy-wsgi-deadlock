@@ -62,3 +62,14 @@ docker kill hello
 docker rm hello
 ```
 
+Workaround
+----------
+
+Default wsgi config will create python sub interpreters which numpy does not support. Forcing wsgi to use the global interpreter will work around this issue.
+
+::
+
+  WSGIApplicationGroup %{GLOBAL}
+
+See https://github.com/numpy/numpy/issues/5856 for details.
+Also see `WSGIApplicationGroup` description on http://modwsgi.readthedocs.io/en/develop/configuration-directives/WSGIApplicationGroup.html for details.
